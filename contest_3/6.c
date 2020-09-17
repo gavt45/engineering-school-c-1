@@ -19,13 +19,13 @@ int main(){
     int l_m=n+1,r_m=n+1;
     for (int l = 0; l < n; l++)
     {
-        for (int r = n-1; r >= l; r--)
+        ll some_sum = 0;
+        for (int i = l; i <= n-1; i++)
         {
-            ll some_sum = 0;
-            for (int i = l; i <= r; i++)
-            {
-                some_sum += a[i];
-            }
+            some_sum += a[i];
+        }
+        for (int r = n-1; r >= l; some_sum-=a[r],r--)
+        {
             if (some_sum > max_sum){
                 max_sum = some_sum;
                 l_m = l;
