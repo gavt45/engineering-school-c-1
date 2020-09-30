@@ -10,7 +10,6 @@ int binsearch (int a [] , int _l , int _r , int t ){
         m = (l + r) / 2;
         if (a[m] == t){
             x = m;
-            break;
         }
         if (a[m] <= t)
             l = m+1;
@@ -19,7 +18,7 @@ int binsearch (int a [] , int _l , int _r , int t ){
         // int x = l
     }
 //    printf("found %d on %d", t, x);
-    if (x!=-1) while (a[x+1] == a[x]) x++;
+//    if (x!=-1) while (a[x+1] == a[x]) x++;
     return x;
 }
 
