@@ -7,17 +7,19 @@
 typedef long long ll;
 
 int main() {
-    ll n, c = 0, k = 1;
+    ll n, sum = 0, k = 1;
 
     scanf("%lld", &n);
-    for (int i = 0; i < n; ++i) {
-        while (n / k - k - i >= 1) { // 1*z <= 10/y {y >= x;
-            printf("k: %lld count: %lld\n", k, n / k - k - i);
-            c += n / k - k - i;
-            k++;
+    // https://www.desmos.com/calculator/xsmmuiktol
+    for (ll x = 1; x <= cbrtl(n); ++x) {
+        ll y = x;
+        while (n/(x*y)-y+1>0){
+//            printf("For x=%lld y=%lld z_count=%lld\n", x, y, n/(x*y)-y+1);
+            sum += n/(x*y)-y+1;
+            y++;
         }
     }
 
-    printf("%lld", c);
+    printf("%lld", sum);
     return 0;
 }
