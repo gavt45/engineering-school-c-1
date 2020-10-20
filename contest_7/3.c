@@ -1,6 +1,9 @@
 //
 // Created by Gav on 19/10/2020.
 //
+//
+// Created by Gav on 19/10/2020.
+//
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,27 +22,28 @@
                                     BYTE_TO_BINARY((a)>>24), BYTE_TO_BINARY((a)>>16), \
                                     BYTE_TO_BINARY((a)>>8), BYTE_TO_BINARY(a));
 
-int main() {
-    int n;
-    int t = 0;
-    char cnt = 0;
-    char c;
-    scanf("%d", &n);
-    scanf("%c", &c); // scan garbage \n
-    for (int i = 0; i < n; ++i) {
-        scanf("%c", &c);
-        char tt = c == '1' ? 1 : 0;
-        t |= tt << cnt;
-//        printf("\n%d\n", tt);
-        cnt = (cnt+1)%8;
-//        PRINT_INT_BIN(t)
+void reverse(int c){
+    PRINT_INT_BIN(c)
+    printf("\n");
+    for (int i = 0; i <= 16; i++) {
+        char first_half = ((1<<(32-i))&c)!=0 ? 1:0;
+        char second_half = ((1<<(i))&c)!=0 ? 1:0;
+        c ^= (-second_half ^ c) & (1UL << (32-i));
+        c ^= (-first_half ^ c) & (1UL << (i));
+//        PRINT_INT_BIN(c)
 //        printf("\n");
-        if (cnt == 0) {
-            printf("%d ", t);
-            cnt = 0;
-            t = 0;
-        }
     }
-    if (n % 8 != 0) printf("%d",t);
+    char fl = c&1;
+//    printf("flag: %d\n", fl);
+    c=c>>1;
+    c ^= (-fl^c) & (1UL << 31);
+    printf("%d\n", c);
+    PRINT_INT_BIN(c)
+}
+
+int main() {
+    int d;
+    scanf("%d", &d);
+    reverse(d);
     return 0;
 }
