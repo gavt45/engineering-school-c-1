@@ -1,23 +1,8 @@
 //
 // Created by Gav on 09/12/2020.
 //
-#include <stdlib.h>
 #include <stdio.h>
-
-int partition(int *a, int start, int stop) {
-    int x=a[start],i=start-1,j=stop+1,tmp;
-    while (1) {
-        do  j--; while (a[j] > x);
-        do  i++; while (a[i] < x);
-        if  (i < j) {
-//            swap(&a[i], &a[j]);
-            tmp = a[j];
-            a[j] = a[i];
-            a[i] = tmp;
-        } else
-            return j;
-    }
-}
+#include <stdlib.h>
 
 void s0rt(int *array, int sz) {
     int s, i, j, tmp;
@@ -33,24 +18,23 @@ void s0rt(int *array, int sz) {
     }
 }
 
-void sort(int *a, int start, int stop) {
-    if (start < stop) {
-        int p = partition(a, start, stop);
-        sort(a, start, p);
-        sort(a, p + 1, stop);
-    }
-}
-
-int main() {
-    int n;
+int main(){
+    int n,_n;
+    long long sum = 0;
     scanf("%d", &n);
     int * a = (int*)malloc(n * sizeof(int));
     for (int i = 0; i < n; ++i) {
         scanf("%d", &a[i]);
     }
     s0rt(a, n);
-    for (int j = 0; j < n; ++j) {
-        printf("%d ", a[j]);
+    _n=n;
+    if (n == 1) {
+        printf("%d", a[0]);
+        return 0;
     }
+    for (int j = 0; j < n; ++j) {
+        sum += (long long)a[j] * (n - j - 1);
+    }
+    printf("%lld", sum);
     return 0;
 }
